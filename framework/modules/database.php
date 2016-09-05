@@ -1,13 +1,15 @@
 <?php
-include 'connect.php';
+namespace Framework\DatabaseModule;
+require '../framework/includes/connect.php';
+use Framework\Includes\Connect as Connect;
 
-class Query extends Connection
+class Database extends Connect
 {
     private $db;
 
     public function __construct()
     {
-        $this->db = Connection::getInstance()->getConnection();
+        $this->db = Connect::getInstance("warfire", "root", "")->getConnection();
     }
 
     public function select($query)

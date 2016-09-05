@@ -1,14 +1,15 @@
 <?php
 
-class IndexController
+use Framework\ViewModule\View as View;
+
+class indexController 
 {
     public function __construct()
     {
-        echo "inside index";
     }
     public function index()
     {
-        echo "asd";
+        View::setView("home");
     }
 
 }

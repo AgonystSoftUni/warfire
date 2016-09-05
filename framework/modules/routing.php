@@ -1,4 +1,7 @@
 <?php
+
+namespace Framework\RoutingModule;
+
 class Routing
 {
     private $uri = [];
@@ -15,8 +18,7 @@ class Routing
     }
     public function submit()
     {
-        $uri = isset($_GET['uri']) ? $_GET['uri'] : '/';
-
+        $uri = isset($_GET['uri']) ? $_GET['uri'] : 'home';
         foreach($this->uri as $key => $value)
         {
             if(preg_match("#^$value$#", $uri))
@@ -25,6 +27,10 @@ class Routing
                 $callMethod = $currentMethodClass[1];
                 $callClass = new $currentMethodClass[0];
                 call_user_func_array(array($callClass, $callMethod), array());
+            }
+            else
+            {
+                header("location: home");
             }
         }
     }

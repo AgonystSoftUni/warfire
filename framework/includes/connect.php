@@ -1,6 +1,7 @@
 <?php
+namespace Framework\Includes;
 
-class Connection 
+class Connect
 {
 	private $_connection;
 	private static $_instance;
@@ -9,8 +10,7 @@ class Connection
     {
         try
         {
-		    $this->_connection = new PDO('mysql:host=localhost;dbname=$dbname', $username, $password);
-            $this->_connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		    $this->_connection = new \PDO("mysql:host=localhost;dbname=$dbname", $username, $password);
         }
         catch(PDOException $e)
         {
@@ -18,11 +18,11 @@ class Connection
         }
     }
 
-	public static function getInstance()
+	public static function getInstance($dbname, $username, $password)
     {
 		if(!self::$_instance) 
         { 
-			self::$_instance = new self();
+			self::$_instance = new self($dbname, $username, $password);
 		}
 		return self::$_instance;
 	}
